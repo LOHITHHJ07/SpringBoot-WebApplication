@@ -47,11 +47,11 @@ pipeline {
         //     }
         // }
         
-        // stage('Maven Build') {
-        //     steps {
-        //             sh "mvn clean compile"
-        //     }
-        // }
+        stage('Maven Build') {
+            steps {
+                    sh "mvn clean compile"
+            }
+        }
         
         // stage('Docker Build & Push') {
         //     steps {
