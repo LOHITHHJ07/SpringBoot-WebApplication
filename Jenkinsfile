@@ -53,17 +53,17 @@ pipeline {
             }
         }
         
-        // stage('Docker Build & Push') {
-        //     steps {
-        //            script {
-        //                withDockerRegistry(credentialsId: 'b289dc43-2ede-4bd0-95e8-75ca26100d8d', toolName: 'docker') {
-        //                     sh "docker build -t webapp ."
-        //                     sh "docker tag webapp adijaiswal/webapp:latest"
-        //                     sh "docker push adijaiswal/webapp:latest "
-        //                 }
-        //            } 
-        //     }
-        // }
+        stage('Docker Build & Push') {
+            steps {
+                   script {
+                       withDockerRegistry(credentialsId: '07eb5b42-8bb5-4721-81a6-8b9e546fbe97', toolName: 'docker') {
+                            sh "docker build -t webapp ."
+                            sh "docker tag lohithhj/lohith_public_repo:latest"
+                            sh "docker push lohithhj/lohith_public_repo:latest "
+                        }
+                   } 
+            }
+        }
         
         // stage('Docker Image scan') {
         //     steps {
