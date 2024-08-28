@@ -55,18 +55,17 @@ pipeline {
         
          stage('Build and Push Docker Image') {
             steps {
-                script {
-                    withDockerRegistry([credentialsId: '07eb5b42-8bb5-4721-81a6-8b9e546fbe97', url: 'https://index.docker.io/v1/']) {
-                        // Build the Docker image and tag it as 'webapp'
-                        sh "docker build -t webapp ."
+                  script {
+            withDockerRegistry([credentialsId: '07eb5b42-8bb5-4721-81a6-8b9e546fbe97', url: 'https://index.docker.io/v1/']) {
+                // Build the Docker image and tag it as 'webapp'
+                sh "docker build -t webapp ."
 
-                        // Tag the built image with another tag (if necessary)
-                         sh "docker tag webapp  lohithhj/webapp:latest"
-                       
+                // Tag the built image correctly
+                sh "docker tag webapp lohithhj/lohith_public_repo:latest"
 
-                        // Push the Docker image to Docker Hub
-                        sh "docker push lohithhj/lohith_public_repo:latest"
-                    }
+                // Push the Docker image to Docker Hub
+                sh "docker push lohithhj/lohith_public_repo:latest"
+                   }
                 }
             }
         }
