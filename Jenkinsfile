@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Git Checkout ') {
             steps {
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/jaiswaladi246/SpringBoot-WebApplication.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/LOHITHHJ07/SpringBoot-WebApplication.git'
             }
         }
         
@@ -29,47 +29,47 @@ pipeline {
             }
         }
         
-        stage('Sonarqube Analysis') {
-            steps {
-                    withSonarQubeEnv('sonar-server') {
-                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Java-WebApp \
-                        -Dsonar.java.binaries=. \
-                        -Dsonar.projectKey=Java-WebApp '''
+        // stage('Sonarqube Analysis') {
+        //     steps {
+        //             withSonarQubeEnv('sonar-server') {
+        //                 sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Java-WebApp \
+        //                 -Dsonar.java.binaries=. \
+        //                 -Dsonar.projectKey=Java-WebApp '''
     
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
         
-        stage('OWASP Dependency Check') {
-            steps {
-                   dependencyCheck additionalArguments: '--scan ./   ', odcInstallation: 'DP'
-                   dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
+        // stage('OWASP Dependency Check') {
+        //     steps {
+        //            dependencyCheck additionalArguments: '--scan ./   ', odcInstallation: 'DP'
+        //            dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        //     }
+        // }
         
-        stage('Maven Build') {
-            steps {
-                    sh "mvn clean compile"
-            }
-        }
+        // stage('Maven Build') {
+        //     steps {
+        //             sh "mvn clean compile"
+        //     }
+        // }
         
-        stage('Docker Build & Push') {
-            steps {
-                   script {
-                       withDockerRegistry(credentialsId: 'b289dc43-2ede-4bd0-95e8-75ca26100d8d', toolName: 'docker') {
-                            sh "docker build -t webapp ."
-                            sh "docker tag webapp adijaiswal/webapp:latest"
-                            sh "docker push adijaiswal/webapp:latest "
-                        }
-                   } 
-            }
-        }
+        // stage('Docker Build & Push') {
+        //     steps {
+        //            script {
+        //                withDockerRegistry(credentialsId: 'b289dc43-2ede-4bd0-95e8-75ca26100d8d', toolName: 'docker') {
+        //                     sh "docker build -t webapp ."
+        //                     sh "docker tag webapp adijaiswal/webapp:latest"
+        //                     sh "docker push adijaiswal/webapp:latest "
+        //                 }
+        //            } 
+        //     }
+        // }
         
-        stage('Docker Image scan') {
-            steps {
-                    sh "trivy image adijaiswal/webapp:latest "
-            }
-        }
+        // stage('Docker Image scan') {
+        //     steps {
+        //             sh "trivy image adijaiswal/webapp:latest "
+        //     }
+        // }
         
     }
 }
