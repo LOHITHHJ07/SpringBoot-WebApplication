@@ -6,9 +6,9 @@ pipeline {
         maven 'maven'
     }
     
-    // environment{
-    //     SCANNER_HOME= tool 'sonar-scanner'
-    // }
+    environment{
+        SCANNER_HOME= tool 'sonarScanner'
+    }
 
     stages {
         stage('Git Checkout ') {
@@ -29,16 +29,16 @@ pipeline {
             }
         }
         
-        // stage('Sonarqube Analysis') {
-        //     steps {
-        //             withSonarQubeEnv('sonar-server') {
-        //                 sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Java-WebApp \
-        //                 -Dsonar.java.binaries=. \
-        //                 -Dsonar.projectKey=Java-WebApp '''
+        stage('Sonarqube Analysis') {
+            steps {
+                    withSonarQubeEnv('sonar-server') {
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Java-WebApp \
+                        -Dsonar.java.binaries=. \
+                        -Dsonar.projectKey=Java-WebApp '''
     
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
         
         // stage('OWASP Dependency Check') {
         //     steps {
