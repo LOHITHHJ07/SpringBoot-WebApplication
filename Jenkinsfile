@@ -31,7 +31,7 @@ pipeline {
         
         stage('Sonarqube Analysis') {
             steps {
-                    withSonarQubeEnv('sonar-server') {
+                    withSonarQubeEnv('sonar_server') {
                         sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Java-WebApp \
                         -Dsonar.java.binaries=. \
                         -Dsonar.projectKey=Java-WebApp '''
