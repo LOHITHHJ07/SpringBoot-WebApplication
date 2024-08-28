@@ -59,7 +59,7 @@ pipeline {
                        withDockerRegistry(credentialsId: '42-8bb5-4721-81a6-8b9e546fbe97', toolName: 'docker') {
                             sh "docker build -t webapp ."
                             sh "docker tag webapp lohithhj/lohith_public_repo:latest"
-                            sh "docker pushlohithhj/lohith_public_repo:latest "
+                            sh "docker push lohithhj/lohith_public_repo:latest "
                         }
                    } 
             }
