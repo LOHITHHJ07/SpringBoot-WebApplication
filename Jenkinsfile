@@ -4,12 +4,8 @@ pipeline {
    environment {
     JAVA_HOME = "/usr/lib/jvm/java-11-openjdk"  // Adjust path based on system
     PATH = "${JAVA_HOME}/bin:${env.PATH}"
-}
+   }
 
-    
-    environment{
-        SCANNER_HOME= tool 'sonarScanner'
-    }
 
     stages {
         stage('Git Checkout ') {
